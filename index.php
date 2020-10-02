@@ -2,10 +2,6 @@
 
 require "modal/modal.php";
 require "pokemon.php";
-require "pokeStats/attacks.php";
-require "pokeStats/energyType.php";
-require "pokeStats/weakness.php";
-require "pokeStats/resistance.php";
 
 $pokemon1 = new pokemon(
 	"Pikachu",
@@ -14,7 +10,7 @@ $pokemon1 = new pokemon(
 	[new attacks("Electric Ring", 50),
 	new attacks("Pika Punch", 20)],
 	new weakness($energyTypes[2], 1.5),
-	new resistance($energyTypes[3], 2.0);
+	new resistance($energyTypes[3], 2.0)
 );
 
 $pokemon2 = new pokemon(
@@ -24,7 +20,10 @@ $pokemon2 = new pokemon(
 	[new attacks("Head Butt", 10),
 	new attacks("Flare", 30)],
 	new weakness($energyTypes[1], 2),
-	new resistance($energyTypes[0], 10);
+	new resistance($energyTypes[0], 10)
 );
+
+$pokemon1->attacks($pokemon2, 0);
+$pokemon2->attacks($pokemon1, 1);
 
 ?>
