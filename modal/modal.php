@@ -12,21 +12,21 @@ $energyTypes = [
     new energyType("Fighting")
 ];
 
-function increasePopulation()
-{
-	global $total_pokemon;
+//function increasePopulation()
+//{
+//	global $total_pokemon;
+//
+//	if($total_pokemon != null){
+//		$total_pokemon = $total_pokemon + 1;
+//	} else {
+//		$total_pokemon = 1;
+//	}
+//}
 
-	if($total_pokemon != null){
-		$total_pokemon = $total_pokemon + 1;
-	} else {
-		$total_pokemon = 1;
-	}
-}
-
-function getPopulation()
-{
-	global $total_pokemon;
-
-	print "The total pokemon created: " . $total_pokemon;
-}
+//function getPopulation()
+//{
+//	global $total_pokemon;
+//
+//	print "The total pokemon created: " . $total_pokemon;
+//}
 ?>

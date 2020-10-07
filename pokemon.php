@@ -12,8 +12,6 @@ class pokemon
 
 	public function __construct($name, $energyType, $hitpoints, $attacks, $weakness, $resistance)
 	{
-		increasePopulation();
-
 		$this->name = $name;
 		$this->energyType = $energyType;
 		$this->hitpoints = $hitpoints;
@@ -21,6 +19,8 @@ class pokemon
 		$this->attacks = $attacks;
 		$this->weakness = $weakness;
 		$this->resistance = $resistance;
+
+		$this->increasePopulation();
 	}
 
 	public function attacks($target, $attack){
@@ -38,7 +38,34 @@ class pokemon
         $target->hitpoints -= $damage;
 
 		echo "dealing a total of " . $damage . " damage.<br> " . $target->name . " is left with " . $target->hitpoints . " hitpoints <br><br>";
-    }
-}
+		$target->health = $target->hitpoints;
 
+		if($target->health == 0 || $target->health < 0){
+			print $target->name . " Lost all of their health and died <br><br>";
+			$target->decreasePopulation($target);
+		}
+    }
+
+	public function increasePopulation(){
+		global $livingPokemon;
+
+		array_push($livingPokemon, $this);
+	}
+
+	public function decreasePopulation($target){
+		global $livingPokemon;
+		
+		for($a=0; $a<=count($livingPokemon)-1; $a++){
+			if($livingPokemon[$a]->name == $target->name){
+				unset($livingPokemon[$a]);
+			}
+		}
+	}
+
+	public function getPopulation(){
+		global $livingPokemon;
+
+		print "The total number of living pokemon: " . count($livingPokemon) . "<br><br>";
+	}
+}
 ?>
