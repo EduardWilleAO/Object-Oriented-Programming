@@ -3,6 +3,8 @@
 require "modal/modal.php";
 require "pokemon.php";
 
+$total_pokemon = 0;
+
 $pokemon1 = new pokemon(
 	"Pikachu",
 	$energyTypes[0],
@@ -25,5 +27,7 @@ $pokemon2 = new pokemon(
 
 $pokemon1->attacks($pokemon2, 0);
 $pokemon2->attacks($pokemon1, 1);
+
+getPopulation();
 
 ?>

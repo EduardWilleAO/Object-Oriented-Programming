@@ -12,6 +12,8 @@ class pokemon
 
 	public function __construct($name, $energyType, $hitpoints, $attacks, $weakness, $resistance)
 	{
+		increasePopulation();
+
 		$this->name = $name;
 		$this->energyType = $energyType;
 		$this->hitpoints = $hitpoints;
