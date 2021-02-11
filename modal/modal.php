@@ -1,6 +1,6 @@
 <?php
 // class-construct
-class pokemon
+class Pokemon
 {
 	public $name;
 	public $energyType;
@@ -12,24 +12,32 @@ class pokemon
 
 	public function __construct($name, $energyType, $hitpoints, $attacks, $weakness, $resistance)
 	{
-		$this->name = $name;
-		$this->energyType = $energyType;
-		$this->hitpoints = $hitpoints;
-        $this->health = $this->hitpoints;
-		$this->attacks = $attacks;
-		$this->weakness = $weakness;
-		$this->resistance = $resistance;
+		$this->__set('name', $name);
+		$this->__set('energyType', $energyType);
+		$this->__set('hitpoints', $hitpoints);
+		$this->__set('health', $this->hitpoints);
+		$this->__set('attacks', $attacks);
+		$this->__set('weakness', $weakness);
+		$this->__set('resistance', $resistance);
 
 		$this->increasePopulation();
 	}
 
+	public function __set($property, $value){
+		$this->$property = $value;
+	}
+
+	public function __get($property){
+		return $this->$property;
+	}
+
 	public function attacks($target, $attack){
-		if($this->health <= 0){ 
-			print $this->name . " does not have anymore health so it can no longer attack!<br><br>";
+		if($this->__get('health') <= 0){ 
+			print $this->__get('name') . " does not have anymore health so it can no longer attack!<br><br>";
 		} else {
 			$damage = $this->attacks[$attack]->damage;
 
-			echo $this->name . " attacks " . $target->name . " with " . $this->attacks[$attack]->name . " ";
+			echo $this->__get('name') . " attacks " . $target->name . " current health: " . $target->hitpoints . " with " . $this->attacks[$attack]->name . " ";
 
 			// Two simple checks for weakness and resistance (It simply compares the names, if the same then add multiplier)
 			if ($this->energyType->name == $target->weakness->energyType->name) {
@@ -52,12 +60,12 @@ class pokemon
     }
 
 	// Functions to increase and decrease the total population
-	public function increasePopulation(){
+	private function increasePopulation(){
 		global $livingPokemon;
 
 		array_push($livingPokemon, $this);
 	}
-	public function decreasePopulation($target){
+	private static function decreasePopulation($target){
 		global $livingPokemon;
 		
 		for($a=0; $a<=count($livingPokemon)-1; $a++){

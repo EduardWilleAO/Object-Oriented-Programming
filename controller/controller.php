@@ -1,10 +1,10 @@
 <?php
 require "modal/modal.php";
 
-require "pokeStats/attacks.php";
-require "pokeStats/energyType.php";
-require "pokeStats/weakness.php";
-require "pokeStats/resistance.php";
+// This is an autoloader which loads all classes in the folder "pokeStats"
+spl_autoload_register(function($class){
+	include 'pokeStats/' . $class . '.php';
+});
 
 $total_pokemon = 0;
 $livingPokemon = [];
@@ -16,15 +16,15 @@ $energyTypes = [
     new energyType("Fighting")
 ];
 
-$pokemon1 = new pokemon(
+$pokemon1 = new Pokemon(
 	"Pikachu",
 	$energyTypes[0],
-	"60",
+	"45",
 	[new attacks("Electric Ring", 50), new attacks("Pika Punch", 20)],
 	new weakness($energyTypes[2], 1.5),
 	new resistance($energyTypes[3], 2.0)
 );
-$pokemon2 = new pokemon(
+$pokemon2 = new Pokemon(
 	"Charmeleon",
 	$energyTypes[2],
 	"60",
